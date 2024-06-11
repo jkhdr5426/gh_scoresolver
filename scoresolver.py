@@ -204,7 +204,7 @@ for i in range(len(windows)):
     cvpath = os.path.join(newpath,"cv",f'cv_{i}.txt')
     data = np.loadtxt(f'{cvpath}')
     plt.hist(data[:,1])
-    metafileline = f'cv_{i}.txt {windows[i]}' + str(wdelta) + '\n' # ? do i do just 'cv_{i}.txt {windows[i]}' or '{cvpath}' ?
+    metafileline = f'{cvpath} {windows[i]}' + str(wdelta) + '\n' # ? do i do just 'cv_{i}.txt {windows[i]}' or '{cvpath}' ?
     metafilelines.append(metafileline)
 
 plt.title("Histogram")
