@@ -1,2 +1,0 @@
-/Users/edwardkim/Desktop/gh_scoresolver/pdb_5/cv/cv_0.txt 1.3 1000 
-/Users/edwardkim/Desktop/gh_scoresolver/pdb_5/cv/cv_1.txt 3.3 1000 

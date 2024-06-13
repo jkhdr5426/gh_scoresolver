@@ -13,24 +13,25 @@ from progress.bar import IncrementalBar
 import pathlib
 
 # & make new test folder
-masterpath = pathlib.Path().absolute()
+masterpath = os.path.join(pathlib.Path().absolute())
+testpath = os.path.join(masterpath,"tests")
 pdbname = "deca.pdb"
-pdbpath = os.path.join(masterpath,"pdb",pdbname)
+pdbpath = os.path.join(testpath,"pdb",pdbname)
 
-if not os.path.exists(os.path.join(masterpath,"pdb")):
-    os.makedirs(os.path.join(masterpath,"pdb"))
+if not os.path.exists(os.path.join(testpath,"pdb")):
+    os.makedirs(os.path.join(testpath,"pdb"))
 
-dir_list = os.listdir(masterpath)
+dir_list = os.listdir(testpath)
 
 def increment_test_string(test_string):
     # Regular expression pattern to match "test_" followed by digits
-    pattern = re.compile(r'pdb_(\d+)')
+    pattern = re.compile(r't(\d+)_{pdbname}')
     
     match = pattern.match(test_string)
     if match:
         index = int(match.group(1))
         new_index = index + 1
-        new_string = f"pdb_{new_index}"
+        new_string = f"t{new_index}_{pdbname}"
         return new_string
     else:
         return None
@@ -38,7 +39,7 @@ def increment_test_string(test_string):
 def nextFolder(): 
     max_index = -1
     max_folder = None
-    pattern = re.compile(r'pdb_(\d+)')
+    pattern = re.compile(r't(\d+)_{pdbname}')
 
     for folder in dir_list:
         match = pattern.match(folder)
@@ -49,11 +50,11 @@ def nextFolder():
                 max_folder = folder
 
     if max_folder == None:
-        return "pdb_0"
+        return f"t0_{pdbname}"
     return increment_test_string(max_folder)
 
 testname = nextFolder()
-newpath = os.path.join(masterpath, testname)
+newpath = os.path.join(testpath, testname)
 
 if not os.path.exists(newpath):
     os.makedirs(newpath)

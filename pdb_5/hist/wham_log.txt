@@ -1,8 +1,0 @@
-# /Users/edwardkim/Desktop/gh_scoresolver/wham4/wham/wham 1.3 3.3 50 1e-6 300 0 /Users/edwardkim/Desktop/gh_scoresolver/pdb_5/hist/metafile.txt /Users/edwardkim/Desktop/gh_scoresolver/pdb_5/hist/pmf.txt
-# Number of windows = 2
-# Asserting i: 2 versus histgroup->num_windows: 2 
-# Dumping simulation biases, in the metadata file order 
-# Window  F (free energy units)
-# 0	nan
-# 1	nan
-# No MC error analysis requested
