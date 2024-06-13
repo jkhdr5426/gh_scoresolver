@@ -1,4 +1,0 @@
-# /Users/edwardkim/Desktop/scoresolver/wham/wham/wham 1.3 3.3 50 1e-6 300 0 /Users/edwardkim/Desktop/scoresolver/pdb_5/hist/metafile.txt /Users/edwardkim/Desktop/scoresolver/pdb_5/hist/pmf.txt
-#Number of windows = 2
-Error parsing metafile: cv_0.txt
-Error parsing metafile: cv_1.txt

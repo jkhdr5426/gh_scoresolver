@@ -1,4 +1,3 @@
-import MDAnalysis as mda
 import openmm as mm
 from openmm import unit
 import numpy as np
@@ -10,7 +9,7 @@ import subprocess
 import os
 import re
 import sys
-from progress.bar import IncrementalBar
+from progress.bar import IncrementalBar 
 import pathlib
 
 # & make new test folder
@@ -92,7 +91,7 @@ index1 = 8
 index2 = 98
 cv = mm.CustomBondForce('r')
 cv.addBond(index1, index2)
-num_win = 2
+num_win = 24
 
 r0 = L_i*unit.nanometers #start value
 fc_pull = 1000.0*unit.kilojoules_per_mole/unit.nanometers**2 #force constnat
@@ -204,7 +203,7 @@ for i in range(len(windows)):
     cvpath = os.path.join(newpath,"cv",f'cv_{i}.txt')
     data = np.loadtxt(f'{cvpath}')
     plt.hist(data[:,1])
-    metafileline = f'{cvpath} {windows[i]}' + str(wdelta) + '\n' # ? do i do just 'cv_{i}.txt {windows[i]}' or '{cvpath}' ?
+    metafileline = f'{cvpath} {windows[i]} {wdelta} \n' # ? do i do just 'cv_{i}.txt {windows[i]}' or '{cvpath}' ?
     metafilelines.append(metafileline)
 
 plt.title("Histogram")
@@ -219,7 +218,7 @@ with open(os.path.join(newpath,"hist","metafile.txt"), "w") as f:
 
 # ! USE POPEN TO EXECUTE child program ---->>>>> /Users/edwardkim/Downloads/wham 1.3 3.3 50 1e-6 300 0 metafile.txt pmf.txt > wham_log.txt
 
-wham_xecpath = os.path.join(masterpath,"wham3","wham","wham")
+wham_xecpath = os.path.join(masterpath,"wham4","wham","wham")
 print([wham_xecpath, str(L_i), str(L_f), '50', '1e-6', '300', '0', os.path.join(newpath,"hist", "metafile.txt"), os.path.join(newpath,"hist", "pmf.txt")])
 args = [wham_xecpath, str(L_i), str(L_f), '50', '1e-6', '300', '0', os.path.join(newpath,"hist", "metafile.txt"), os.path.join(newpath,"hist", "pmf.txt")]
 
@@ -232,7 +231,7 @@ process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 stdout_data, stderr_data = process.communicate()
 
 # Write stdout to wham_logs.txt
-with open(os.path.join(newpath,"hist","wham_logs.txt"), "w") as output_file:
+with open(os.path.join(newpath,"hist","wham_log.txt"), "w") as output_file:
     output_file.write(stdout_data.decode())  # Decode stdout_data from bytes to string
 
 # Check if there are any errors
@@ -243,9 +242,39 @@ if stderr_data:
 
 # & plot PMF
 
-open(os.path.join(newpath,"hist","pmf.txt"), "w")
-pmf = np.loadtxt(os.path.join(newpath, "hist", "pmf.txt"))
-plt.plot(pmf[:,0], pmf[:,1])
-plt.xlabel("r (nm)")
-plt.ylabel("PMF (kJ/mol)")
+coordinates = []
+free_energies = []
+probabilities = []
+
+with open(os.path.join(newpath,"hist", "pmf.txt"), 'r') as file:
+    for line in file:
+        # Skip comment lines
+        if line.startswith('#'):
+            continue
+        # Split the line into columns
+        columns = line.split()
+        if len(columns) == 5:
+            coor = float(columns[0])
+            free = float(columns[1]) if columns[1] != 'nan' else None
+            prob = float(columns[3]) if columns[3] != 'nan' else None
+            coordinates.append(coor)
+            free_energies.append(free)
+            probabilities.append(prob)
+
+fig, ax1 = plt.subplots()
+
+ax1.set_xlabel('Coordinate')
+ax1.set_ylabel('Free Energy', color='tab:blue')
+ax1.plot(coordinates, free_energies, 'b-', label='Free Energy')
+ax1.tick_params(axis='y', labelcolor='tab:blue')
+
+ax2 = ax1.twinx()
+ax2.set_ylabel('Probability', color='tab:red')
+ax2.plot(coordinates, probabilities, 'r-', label='Probability')
+ax2.tick_params(axis='y', labelcolor='tab:red')
+
+fig.tight_layout()
+fig.legend(loc='upper right', bbox_to_anchor=(1, 1), bbox_transform=ax1.transAxes)
+
+plt.title('Histogram Data Plot')
 plt.show()

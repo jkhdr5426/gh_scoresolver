@@ -1,4 +1,0 @@
-# ./wham3/wham/wham 1.3 3.3 50 1e-6 300 0 ./pdb_10/hist/metafile.txt ./pdb_10/hist/pmf.txt
-#Number of windows = 2
-Error parsing metafile: cv_0.txt
-Error parsing metafile: cv_1.txt
