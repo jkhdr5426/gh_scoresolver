@@ -170,7 +170,7 @@ P_i'(\xi) \propto \int e^{-\beta (E_i'(\textbf{r}))} \delta (\xi - \xi(\textbf{r
 $$
 
 10. Free Energy at window $i$ to unbiased version:
-i
+
 $$
 F'(\xi) = -k_B T \ln P_i(\xi) + w_i(\xi) + C_i = F_i(\xi) + w_i(\xi) + C_i. \quad [10]
 $$
