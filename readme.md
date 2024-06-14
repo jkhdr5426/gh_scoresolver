@@ -85,11 +85,14 @@ In all, the main theory is that we are pulling a complex or whatever at two pivo
 ### Equations
 
 1. Reaction Coordinate
+
 $$
 \xi(\textbf{r}) = \textrm{the progress of a reaction as function of atomic configuration/coordinates}
 $$
+
    Note: different atomic configurations $\textbf{r}$ can have the same reaction coordinate due to $\xi$'s limited scope, especially in reversible reactions/processes. However, this is a necessary sacrifice because we need to reduce complexity and dimension of the problem. Essentially, $\xi$ is a simplification of $\textbf{r}$.
 2. Free energy in the canonical ensemble:
+
 $$
 F = -k_B T \ln Z
 $$
@@ -97,6 +100,7 @@ $$
    In context, $F$ can be expressed in terms of a specific state $\xi$, so $F(\xi) = -k_B T \ln P(\xi) + C$
 
 3. Dirac Delta Function: ($\delta(x) = \delta_1(x)$):
+
 $$
 {\displaystyle \delta _{a}(x)={\frac {1}{\left|a\right|{\sqrt {\pi }}}}e^{-(x/a)^{2}}}
 $$
@@ -154,11 +158,13 @@ So, each quantity discussed previously must have biased version indicated by an 
 
 
 8. Energy at window $i$ to unbiased version:
+
 $$
 E'_i(\textbf{r}) = E_i(\textbf{r}) + w_i((\xi(\textbf{r})))  \quad [8]
 $$
 
 9. Probability distribution at window $i$ to unbiased version:
+
 $$
 P_i'(\xi) \propto \int e^{-\beta (E_i'(\textbf{r}))} \delta (\xi - \xi(\textbf{r})) dr \propto P_i(\xi) e^{-\beta w_i(\xi)}, \quad [9]
 $$
