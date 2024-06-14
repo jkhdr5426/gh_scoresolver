@@ -121,3 +121,32 @@ The windows do not need to be linearly spaced and they can have different spring
    \[
    F(\xi) = -k_B T \ln P(\xi)
    \]
+
+## Selecting Parameters
+
+The most important parameters are:
+
+1. \(L_i\) and \(L_f\): the starting and ending lengths of the complex you are trying to stretch
+
+2. \(\textrm{index1}\) and \(\textrm{index2}\): the indexes of the two atoms we want to pivot as endpoints and stretch accordingly.
+
+Virtually, \(L_i\) can be easily determined by looking at the original PDB file through a MD visualizer, and \(L_f\) can be any value \(L_f \gg L_i\) (by maybe a factor less than \(10^{2}\) ish) if you are stretching.
+
+However, the pivot indexes can be a little tricky to determine. But, the best way to start off is by identifying your objective and looking at the starting PDB to get a glipmse at what you're working with.
+
+--- 
+
+**Generally Pick the strongest parts of the Complex**
+   1. For proteins: C-alpha atoms are picked because they're usually the backbone atoms that represent the structure very well, so stretching that wont break the system entirely (they are strong enough to stretch).
+   2. For nucleic acids: Phosphate atoms or specific base atoms (because again, they're the strongest backbones.)
+   3. For small molecules or ligands: Select atoms that are involved in key interactions or are structurally significant.
+---
+
+If you are trying to get the binding affinity of a docked complex (which is what I am trying to do in this case,) I would select the center of mass of the ligand, and the key atom in a resiude in the binding pocket of the receptor.
+
+As stored in the 
+~~~
+./gh_scoresolver/tests/pdb/ahl_dock_luxr_1.pdb
+~~~
+
+PDB file, we have a ligand protein \(\textrm{ahl}\) docked into a receptor protein \(\textrm{luxr}\).

@@ -15,7 +15,7 @@ import pathlib
 # & make new test folder
 masterpath = os.path.join(pathlib.Path().absolute())
 testpath = os.path.join(masterpath,"tests")
-pdbname = "deca.pdb"
+pdbname = "protein.pdb-job#118031-P13_Kinase_PFOA.pdb"
 pdbpath = os.path.join(testpath,"pdb",pdbname)
 
 if not os.path.exists(os.path.join(testpath,"pdb")):
