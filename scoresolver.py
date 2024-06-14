@@ -264,7 +264,7 @@ with open(os.path.join(newpath,"hist", "pmf.txt"), 'r') as file:
 
 fig, ax1 = plt.subplots()
 
-ax1.set_xlabel('Coordinate')
+ax1.set_xlabel('Length (nm)')
 ax1.set_ylabel('Free Energy', color='tab:blue')
 ax1.plot(coordinates, free_energies, 'b-', label='Free Energy')
 ax1.tick_params(axis='y', labelcolor='tab:blue')
