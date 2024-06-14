@@ -73,11 +73,11 @@ In all, the main theory is that we are pulling a complex or whatever at two pivo
 - $P(\xi) $: Probability distribution of the system as a function of CV
 - $\beta $: Inverse temperature ($\beta = 1 / k_B T $)
 - $U(\mathbf{r}) $: Potential energy of the system
-- $U_i^{\text{bias}} $: Biasing potential for window $ i $
+- $U_i^{\text{bias}} $: Biasing potential for window $i $
 - $k $: Force constant for the biasing potential
-- $\xi_i $: Target value of the CV in window $ i $
-- $P_i^{\text{bias}}(\xi) $: Biased probability distribution for window $ i $
-- $n_i(\xi) $: Number of samples in bin $ \xi $ for window $ i $
+- $\xi_i $: Target value of the CV in window $i $
+- $P_i^{\text{bias}}(\xi) $: Biased probability distribution for window $i $
+- $n_i(\xi) $: Number of samples in bin $\xi $ for window $i $
 - $F_i^{\text{bias}}(\xi) $: Biased free energy in window \( i \)
 - $F(\xi) $: Unbiased free energy (Potential of Mean Force, PMF)
 - ${\displaystyle \delta _{a}(x)}$: Dirac delta function
@@ -170,7 +170,7 @@ P_i'(\xi) \propto \int e^{-\beta (E_i'(\textbf{r}))} \delta (\xi - \xi(\textbf{r
 $$
 
 10. Free Energy at window $i$ to unbiased version:
-
+i
 $$
 F'(\xi) = -k_B T \ln P_i(\xi) + w_i(\xi) + C_i = F_i(\xi) + w_i(\xi) + C_i. \quad [10]
 $$
