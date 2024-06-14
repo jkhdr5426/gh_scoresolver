@@ -209,7 +209,7 @@ As stored in the
 ./gh_scoresolver/tests/pdb/ahl_dock_luxr_1.pdb
 ~~~
 
-PDB file, we have a ligand protein $\textrm{ahl} $ docked into a receptor protein $\textrm{luxr} $.
+PDB file, we have a ligand protein ($\textrm{ahl} $) docked into a receptor protein ($\textrm{luxr} $.)
 
 
 
