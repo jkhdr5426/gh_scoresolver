@@ -64,62 +64,62 @@ In all, the main theory is that we are pulling a complex or whatever at two pivo
 
 ### Definitions
 
-- $ F $: Free energy
-- $ k_B $: Boltzmann constant
-- $ T $: Temperature
+- $F $: Free energy
+- $k_B $: Boltzmann constant
+- $T $: Temperature
 - $Z $: Canonical partition function
-- $ \xi $: Collective Variable (CV) $\to$ represents the progress of a reaction into a single value of a **state**
-- $ \mathbf{r} $: Atomic coordinates
-- $ P(\xi) $: Probability distribution of the system as a function of CV
-- $ \beta $: Inverse temperature ($\beta = 1 / k_B T $)
-- $ U(\mathbf{r}) $: Potential energy of the system
-- $ U_i^{\text{bias}} $: Biasing potential for window $ i $
-- $ k $: Force constant for the biasing potential
-- $ \xi_i $: Target value of the CV in window $ i $
-- $ P_i^{\text{bias}}(\xi) $: Biased probability distribution for window $ i $
-- $ n_i(\xi) $: Number of samples in bin $ \xi $ for window $ i $
-- $ F_i^{\text{bias}}(\xi) $: Biased free energy in window \( i \)
-- $ F(\xi) $: Unbiased free energy (Potential of Mean Force, PMF)
-- $ {\displaystyle \delta _{a}(x)}$: Dirac delta function
+- $\xi $: Collective Variable (CV) $\to$ represents the progress of a reaction into a single value of a **state**
+- $\mathbf{r} $: Atomic coordinates
+- $P(\xi) $: Probability distribution of the system as a function of CV
+- $\beta $: Inverse temperature ($\beta = 1 / k_B T $)
+- $U(\mathbf{r}) $: Potential energy of the system
+- $U_i^{\text{bias}} $: Biasing potential for window $ i $
+- $k $: Force constant for the biasing potential
+- $\xi_i $: Target value of the CV in window $ i $
+- $P_i^{\text{bias}}(\xi) $: Biased probability distribution for window $ i $
+- $n_i(\xi) $: Number of samples in bin $ \xi $ for window $ i $
+- $F_i^{\text{bias}}(\xi) $: Biased free energy in window \( i \)
+- $F(\xi) $: Unbiased free energy (Potential of Mean Force, PMF)
+- ${\displaystyle \delta _{a}(x)}$: Dirac delta function
 
 ### Equations
 
 1. Reaction Coordinate
-   $$
-   \xi(\textbf{r}) = \textrm{the progress of a reaction as function of atomic configuration/coordinates}
-   $$
+$$
+\xi(\textbf{r}) = \textrm{the progress of a reaction as function of atomic configuration/coordinates}
+$$
    Note: different atomic configurations $\textbf{r}$ can have the same reaction coordinate due to $\xi$'s limited scope, especially in reversible reactions/processes. However, this is a necessary sacrifice because we need to reduce complexity and dimension of the problem. Essentially, $\xi$ is a simplification of $\textbf{r}$.
 2. Free energy in the canonical ensemble:
-   $$
-   F = -k_B T \ln Z
-   $$
+$$
+F = -k_B T \ln Z
+$$
 
    In context, $F$ can be expressed in terms of a specific state $\xi$, so $F(\xi) = -k_B T \ln P(\xi) + C$
 
 3. Dirac Delta Function: ($\delta(x) = \delta_1(x)$):
-   $$
-   {\displaystyle \delta _{a}(x)={\frac {1}{\left|a\right|{\sqrt {\pi }}}}e^{-(x/a)^{2}}}
-   $$
+$$
+{\displaystyle \delta _{a}(x)={\frac {1}{\left|a\right|{\sqrt {\pi }}}}e^{-(x/a)^{2}}}
+$$
 
    In the case of this theory, it projects the space of $\textbf{r}$ to the space of $\xi$. It picks out the relevant values of $\xi (\textbf{r})$ close to the value $\xi$ in question and concentrates/amplifies those specific values of $\textbf{r}$.
 
-   $$
-   P(\xi)=\int P(\textbf{r})\delta(\xi−\xi(\textbf{r}))d\textbf{r}
-   $$
+$$
+P(\xi)=\int P(\textbf{r})\delta(\xi−\xi(\textbf{r}))d\textbf{r}
+$$
 
 4. Partition Function (discrete):
 
-   $$
-   Z = \sum \textrm{energies of i}^\textrm{th}  \textrm{ state weighed by boltzmann distribution factor} = \sum_{i}{e^{-\beta E_i}}
-   $$
+$$
+Z = \sum \textrm{energies of i}^\textrm{th}  \textrm{ state weighed by boltzmann distribution factor} = \sum_{i}{e^{-\beta E_i}}
+$$
 
    Encapsulates the total distribution of energy, which can later be used to normalize probability distributions over boltzmann factors.
 
 5. Probability Distribution in $\textbf{r}$
 
-   $$
-   P(\textbf{r}) = \frac{\exp(-\beta E(r))}{Z} : \beta = \frac{1}{k_B T}
-   $$
+$$
+P(\textbf{r}) = \frac{\exp(-\beta E(r))}{Z} : \beta = \frac{1}{k_B T}
+$$
 
    Here higher values of $\beta$, or coldness, makes states with lower temperatures more probable than otherwise. While lower values of $\beta$, leading to higher temperatures, makes states with higher temperatures more probable than otherwise. Regardles of positive $\beta >0$, lower temperature states are more probable than higher temperature states. Note in this graph, $\lambda \equiv \beta$.
 
@@ -127,9 +127,9 @@ In all, the main theory is that we are pulling a complex or whatever at two pivo
 
 6. Probability Distribution (continous):
 
-   $$
-   P(\xi)  = \int P(\textbf{r})\delta(\xi−\xi(\textbf{r}))d\textbf{r} = \frac{1}{Z} \int e^{-\beta E(\textbf{r})}\delta(\xi−\xi(\textbf{r}))d\textbf{r} 
-   $$
+$$
+P(\xi)  = \int P(\textbf{r})\delta(\xi−\xi(\textbf{r}))d\textbf{r} = \frac{1}{Z} \int e^{-\beta E(\textbf{r})}\delta(\xi−\xi(\textbf{r}))d\textbf{r} 
+$$
 
    Which is the integration over all possible degrees of freedom of a reaction coordinate $\xi$
 
@@ -141,9 +141,9 @@ Theoretically, when sampling without restraints, the most probable configuration
 
 7. Biasing Potential
 
-   $$
-   w_i(\xi) = \frac12 k(\xi - \xi_i)^2
-   $$
+$$
+w_i(\xi) = \frac12 k(\xi - \xi_i)^2
+$$
 
 It acts a spring force that restrains the system simulation to certain configuration $\xi$. There are multiple windows $i = 1,2,3 \ldots n$ that each sample sufficient amounts of the free energy landscape. This is the main premise of umbrella sampling that separates from other MD simulations. Note $x \equiv \xi$.
 
