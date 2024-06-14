@@ -153,32 +153,32 @@ It acts a spring force that restrains the system simulation to certain configura
 
 ![alt text](image-1.png)
 
-So, each quantity discussed previously must have biased version indicated by an apostrophe superscript $'$.After computing/simulating the system with biasing potentials, we subtract the biased results by the biasing potential and retrive the true energy curve. 
+So, each quantity discussed previously must have biased version indicated by an apostrophe superscript $\textrm{bias}$.After computing/simulating the system with biasing potentials, we subtract the biased results by the biasing potential and retrive the true energy curve. 
 
 
 
 8. Energy at window $i$ to unbiased version:
 
 $$
-E'_i(\textbf{r}) = E_i(\textbf{r}) + w_i((\xi(\textbf{r})))  \quad [8]
+E_i^\text{bias}(\textbf{r}) = E_i(\textbf{r}) + w_i((\xi(\textbf{r})))  \quad [8]
 $$
 
 9. Probability distribution at window $i$ to unbiased version:
 
 $$
-P_i'(\xi) \propto \int e^{-\beta (E_i'(\textbf{r}))} \delta (\xi - \xi(\textbf{r})) dr \propto P_i(\xi) e^{-\beta w_i(\xi)}, \quad [9]
+P_i^\text{bias}(\xi) \propto \int e^{-\beta (E_i^\text{bias}(\textbf{r}))} \delta (\xi - \xi(\textbf{r})) dr \propto P_i(\xi) e^{-\beta w_i(\xi)}, \quad [9]
 $$
 
 10. Free Energy at window $i$ to unbiased version:
 
 $$
-F'(\xi) = -k_B T \ln P_i(\xi) + w_i(\xi) + C_i = F_i(\xi) + w_i(\xi) + C_i. \quad [10]
+F^\text{bias}(\xi) = -k_B T \ln P_i(\xi) + w_i(\xi) + C_i = F_i(\xi) + w_i(\xi) + C_i. \quad [10]
 $$
 
 Combining equations $[8],[9],[10]$, 
 
 $$
-F_i(\xi) = F_i'(\xi)-w_i(\xi) + C_i = -k_B T \text{log}(P_i'(\xi)) - w_i + C_i.
+F_i(\xi) = F_i^\text{bias}(\xi)-w_i(\xi) + C_i = -k_B T \text{log}(P_i^\text{bias}(\xi)) - w_i + C_i.
 $$
 
 ---
