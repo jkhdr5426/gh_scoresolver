@@ -198,7 +198,7 @@ However, the pivot indexes can be a little tricky to determine. But, the best wa
 
 **Generally Pick the strongest parts of the Complex**
    1. For proteins: C-alpha atoms are picked because they're usually the backbone atoms that represent the structure very well, so stretching that wont break the system entirely (they are strong enough to stretch).
-   2. For nucleic acids: Phosphate atoms or specific base atoms (because again, they're the strongest backbones.)
+   2. For nucleic acids: Phosphate atoms or specific base atoms (because again, they're the strongest backbones).
    3. For small molecules or ligands: Select atoms that are involved in key interactions or are structurally significant.
 
 
@@ -209,7 +209,7 @@ As stored in the
 ./gh_scoresolver/tests/pdb/ahl_dock_luxr_1.pdb
 ~~~
 
-PDB file, we have a ligand protein ($\textrm{ahl} $) docked into a receptor protein ($\textrm{luxr} $.)
+PDB file, we have a ligand protein ($\textrm{ahl} $) docked into a receptor protein ($\textrm{luxr} $).
 
 
 
