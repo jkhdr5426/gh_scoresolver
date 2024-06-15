@@ -191,14 +191,14 @@ The most important parameters are:
 
 2. $\textrm{index1}$ and $\textrm{index2}$: the indexes of the two atoms we want to pivot as endpoints and stretch accordingly.
 
-3. $\textrm{fc}$_$\textrm{pull}$: the strength of bias
+3. $\textrm{fc}_\textrm{pull}$: the strength of bias
 
-4. $\textrm{v}$_$\textrm{pulling}$: the speed of exeucting the pulling loop to streth the two pivot atoms
+4. $\textrm{v}_\textrm{pulling}$: the speed of exeucting the pulling loop to streth the two pivot atoms
    (the simulation will thus adjust the total time of the pulling loop based on $L_i$ and $L_f$ as well)
 
 Virtually, $L_i$ can be easily determined by looking at the original PDB file through a MD visualizer, and $L_f$ can be any value $L_f \gg L_i$ (by maybe a factor less than $10^{2}$ ish) if you are stretching.
 
-Additionally, since the simulation is purely discretized, $\textrm{v}$_$\textrm{pulling}$ should be picked at a low value to ensure it captures energy landscape adequetly.
+Additionally, since the simulation is purely discretized, $\textrm{v}_\textrm{pulling}$ should be picked at a low value to ensure it captures energy landscape adequetly.
 
 However, the pivot indexes can be a little tricky to determine. But, the best way to start off is by identifying your objective and looking at the starting PDB to get a glipmse at what you're working with.
 
