@@ -14,18 +14,18 @@ import pathlib
 
 # & make new test folder
 masterpath = os.path.join(pathlib.Path().absolute())
-testpath = os.path.join(masterpath,"tests")
-pdbname = "protein.pdb-job#118031-P13_Kinase_PFOA.pdb"
+testpath = os.path.join(masterpath, "tests")
+pdbname = "deca.pdb"
 pdbpath = os.path.join(testpath,"pdb",pdbname)
 
-if not os.path.exists(os.path.join(testpath,"pdb")):
-    os.makedirs(os.path.join(testpath,"pdb"))
+if not os.path.exists(os.path.join(testpath, "pdb")):
+    os.makedirs(os.path.join(testpath, "pdb"), exist_ok=True)
 
 dir_list = os.listdir(testpath)
 
 def increment_test_string(test_string):
-    # Regular expression pattern to match "test_" followed by digits
-    pattern = re.compile(r't(\d+)_{pdbname}')
+    # regex to match folder names like 't{#}_{pdbname}'
+    pattern = re.compile(r't(\d+)_' + re.escape(pdbname))
     
     match = pattern.match(test_string)
     if match:
@@ -39,7 +39,7 @@ def increment_test_string(test_string):
 def nextFolder(): 
     max_index = -1
     max_folder = None
-    pattern = re.compile(r't(\d+)_{pdbname}')
+    pattern = re.compile(r't(\d+)_' + re.escape(pdbname))
 
     for folder in dir_list:
         match = pattern.match(folder)
@@ -49,7 +49,7 @@ def nextFolder():
                 max_index = index
                 max_folder = folder
 
-    if max_folder == None:
+    if max_folder is None:
         return f"t0_{pdbname}"
     return increment_test_string(max_folder)
 
@@ -57,12 +57,13 @@ testname = nextFolder()
 newpath = os.path.join(testpath, testname)
 
 if not os.path.exists(newpath):
-    os.makedirs(newpath)
+    os.makedirs(newpath, exist_ok=True)
 
-os.makedirs(os.path.join(newpath,"cv"))
-os.makedirs(os.path.join(newpath,"windows"))
-os.makedirs(os.path.join(newpath,"hist"))
+os.makedirs(os.path.join(newpath, "cv"), exist_ok=True)
+os.makedirs(os.path.join(newpath, "windows"), exist_ok=True)
+os.makedirs(os.path.join(newpath, "hist"), exist_ok=True)
 
+print(f"New folder created: '{newpath}'")
 
 # & SYSTEM ####################################################################################################################################
 pdb = app.PDBFile(pdbpath)
@@ -81,6 +82,7 @@ simulation.context.setPositions(pdb.positions)
 simulation.reporters.append(app.DCDReporter(os.path.join(newpath, 'hist', 'smd_traj.dcd'), 10000))
 simulation.context.setVelocitiesToTemperature(300*unit.kelvin)
 simulation.step(1000)
+
 #&##################################################################################################################################
 
 # ~ PARAMS ######################################################################################################
@@ -118,7 +120,43 @@ windows = np.linspace(L_i, L_f, num_win)
 window_coords = []
 window_index = 0
 
+print(f"Initialized System\nSystem: \n\t Forcefield Model: 'amber14-all.xml'\n \t Hydrogen Mass: '1.5 amu'\n \t Step size: {dt}\n\nParameters: \n\t {L_i} {L_f} {index1} {index2} {num_win}\n \t {fc_pull} {v_pulling}\n \t {total_steps} / {increment_steps} | {wTotal}/ {wdelta}")
 
+n = index1
+m = index2
+assert n != m
+
+with open(pdbpath, 'r') as pdb_file:
+    atom_count = 0
+    for line in pdb_file:
+        if line.startswith("ATOM"):
+            atom_count += 1
+            if atom_count == n or atom_count == m:
+                atom_number = int(line[6:11].strip())  # Atom serial number
+                atom_name = line[12:16].strip()  # Atom name
+                residue_name = line[17:20].strip()  # Residue name
+                chain_id = line[21].strip()  # Chain identifier
+                residue_number = int(line[22:26].strip())  # Residue sequence number
+                x_coord = float(line[30:38].strip())  # X coordinate
+                y_coord = float(line[38:46].strip())  # Y coordinate
+                z_coord = float(line[46:54].strip())  # Z coordinate
+                occupancy = float(line[54:60].strip())  # Occupancy
+                temp_factor = float(line[60:66].strip())  # Temperature factor
+                element_symbol = line[76:78].strip()  # Element symbol
+
+                if atom_count == n :
+                    print(f"index1: {index1}")
+                else:
+                    print(f"index2: {index2}")
+                print(f"\t Atom Number: {atom_number}")
+                print(f"\t Atom Name: {atom_name}")
+                print(f"\t Residue Name: {residue_name}")
+                print(f"\t Chain ID: {chain_id}")
+                print(f"\t Residue Number: {residue_number}")
+                print(f"\t Coordinates: ({x_coord}, {y_coord}, {z_coord})")
+                print(f"\t Occupancy: {occupancy}")
+                print(f"\t Temperature Factor: {temp_factor}")
+                print(f"\t Element Symbol: {element_symbol}")
 ##~############################################################################################################################
 
 #!########## SIMULATION ##################################################################################################################
@@ -223,19 +261,19 @@ wham_xecpath = os.path.join(masterpath,"wham4","wham","wham")
 print([wham_xecpath, str(L_i), str(L_f), '50', '1e-6', '300', '0', os.path.join(newpath,"hist", "metafile.txt"), os.path.join(newpath,"hist", "pmf.txt")])
 args = [wham_xecpath, str(L_i), str(L_f), '50', '1e-6', '300', '0', os.path.join(newpath,"hist", "metafile.txt"), os.path.join(newpath,"hist", "pmf.txt")]
 
-#give perms to the path folder 
+# give perms to the path folder 
 os.chmod(wham_xecpath, 0o755)
-# Execute the command and store the Popen object
+# process obj
 process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-# Wait for the process to terminate and capture stdout and stderr
+# wait for process termination and capture output
 stdout_data, stderr_data = process.communicate()
 
-# Write stdout to wham_logs.txt
+# write output to wham logs
 with open(os.path.join(newpath,"hist","wham_log.txt"), "w") as output_file:
     output_file.write(stdout_data.decode())  # Decode stdout_data from bytes to string
 
-# Check if there are any errors
+# check for errors
 if stderr_data:
     print("Error occurred:", stderr_data.decode())  # Decode stderr_data from bytes to string
 
@@ -249,10 +287,10 @@ probabilities = []
 
 with open(os.path.join(newpath,"hist", "pmf.txt"), 'r') as file:
     for line in file:
-        # Skip comment lines
+        # skip comment lines ("# ...")
         if line.startswith('#'):
             continue
-        # Split the line into columns
+        # split lines into columns
         columns = line.split()
         if len(columns) == 5:
             coor = float(columns[0])
@@ -264,7 +302,7 @@ with open(os.path.join(newpath,"hist", "pmf.txt"), 'r') as file:
 
 fig, ax1 = plt.subplots()
 
-ax1.set_xlabel('Length (nm)')
+ax1.set_xlabel(r'\textrm{Reaction Coordinate (nm)}, \xi')
 ax1.set_ylabel('Free Energy', color='tab:blue')
 ax1.plot(coordinates, free_energies, 'b-', label='Free Energy')
 ax1.tick_params(axis='y', labelcolor='tab:blue')

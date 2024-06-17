@@ -91,6 +91,7 @@ $$
 $$
 
    Note: different atomic configurations $\textbf{r}$ can have the same reaction coordinate due to $\xi$'s limited scope, especially in reversible reactions/processes. However, this is a necessary sacrifice because we need to reduce complexity and dimension of the problem. Essentially, $\xi$ is a simplification of $\textbf{r}$.
+   
 2. Free energy in the canonical ensemble:
 
 $$
