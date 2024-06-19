@@ -302,6 +302,10 @@ with open(os.path.join(newpath,"hist", "pmf.txt"), 'r') as file:
 
 fig, ax1 = plt.subplots()
 
+plt.rcParams.update({
+    "text.usetex": True,
+    "font.family": "Helvetica"
+})
 ax1.set_xlabel(r'\textrm{Reaction Coordinate (nm)}, \xi') # ! fix latex rendering
 ax1.set_ylabel('Free Energy', color='tab:blue')
 ax1.plot(coordinates, free_energies, 'b-', label='Free Energy')
