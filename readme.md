@@ -128,7 +128,7 @@ $$
 
    Here higher values of $\beta$, or coldness, makes states with lower temperatures more probable than otherwise. While lower values of $\beta$, leading to higher temperatures, makes states with higher temperatures more probable than otherwise. Regardles of positive $\beta >0$, lower temperature states are more probable than higher temperature states. Note in this graph, $\lambda \equiv \beta$.
 
-   ![Boltzmann Factor](image.png)
+   ![Boltzmann Factor]()
 
 6. Probability Distribution (continous):
 
@@ -152,7 +152,6 @@ $$
 
 It acts a spring force with strength $k $ that restrains the system simulation to state $\xi_i$, the center of window $i$. For example, if the system at $\xi$ is a bout to get away from $\xi_i$, a bias force will force the system to get back to the window, resisting normal eneergy landscape activity. If the strength of $k$ is weak, the system may be able to explore a little more; contrastly, if $k$ too strong, it may not explore enough of each window, so a balance is required. There are multiple windows $i = 1,2,3 \ldots n$ that each sample sufficient amounts of the free energy landscape. This is the main premise of umbrella sampling that separates from other MD simulations. Note $x \equiv \xi$.
 
-![alt text](image-1.png)
 
 So, each quantity discussed previously must have biased version indicated by an apostrophe superscript $\textrm{bias}$.After computing/simulating the system with biasing potentials, we subtract the biased results by the biasing potential and retrive the true energy curve. 
 
@@ -180,6 +179,35 @@ Combining equations $[8],[9],[10]$,
 
 $$
 F_i(\xi) = F_i^\text{bias}(\xi)-w_i(\xi) + C_i = -k_B T \text{log}(P_i^\text{bias}(\xi)) - w_i + C_i.
+$$
+
+## Calculating Binding Constant of a Ligand-Receptor System from the Free Energy Curve
+
+Theoretically, $K_d = \frac{[L][R]}{[LR]}$ where $[L],[R],[LR]$ are the cocentrations of the ligand, receptor, and ligand-receptor complexes respectively. However, since this is computationally intractible to calculate, a more convenient equation would be a relationship between binding free energy and the $K_d$ constant.
+
+1. Absolute Binding Free Energy
+
+$$
+\Delta G^\circ = RT\ln \frac{{K_{\mathrm{d}}}}{{1\,{\mathrm{M}}}} \implies K_d = e^{\frac{\Delta G^\circ}{RT}}\cdot 1\,\ce{M}
+$$
+
+Where $1\,\mathrm{M}$ is 1 molar concentration and $R$ is the universal gas constant. We determine $\Delta G^\circ$ with the PMF graph we have obtanied. In order to do that, we can use this equation:
+
+2. 
+
+$$
+\Delta G^\circ = -RT\ln \frac{{{\int}_{{\mathrm{pocket}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{RT}}}} {\mathrm{d}}\xi}}{{{\int}_{{\mathrm{bulk}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{RT}}}} {\mathrm{d}}\xi}}
+$$
+
+- $\mathrm{pocket} := \{\xi:\textrm{protein at state}\,\xi\,\textrm{is bound to the protein} \}$ 
+- $\mathrm{bulk} := \{\xi:\textrm{protein at state}\,\xi\,\textrm{is not interacting with the protein} \}$ 
+
+So, what we have right now is the $F(\xi)$ curve. So, this equation is esentially:
+
+3.
+
+$$
+\Delta G^\circ = F(\xi_\ce{Unbound}) - F(\xi_\ce{Bound})
 $$
 
 ---
@@ -225,4 +253,4 @@ PDB file, we have a ligand protein ($\textrm{ahl} $) docked into a receptor prot
 
 # Credits
 
-https://openmm.github.io/openmm-cookbook/latest/notebooks/tutorials/umbrella_sampling.html, https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/umba, https://en.wikipedia.org/wiki/Umbrella_sampling
+https://openmm.github.io/openmm-cookbook/latest/notebooks/tutorials/umbrella_sampling.html, https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/umba, https://en.wikipedia.org/wiki/Umbrella_sampling, https://www.nature.com/articles/s43588-022-00389-9

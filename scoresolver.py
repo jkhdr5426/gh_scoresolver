@@ -108,7 +108,7 @@ wdelta = 1000 # ? record steps
 
 
 # * Harmonic force definiton
-pullingForce = mm.CustomCVForce('0.5 * fc_pull * (cv-r0)^2')
+pullingForce = mm.CustomCVForce('0.5 * fc_pull * (cv-r0)^2') #? maybe add rotational bias as well?
 pullingForce.addGlobalParameter('fc_pull', fc_pull)
 pullingForce.addGlobalParameter('r0', r0)
 pullingForce.addCollectiveVariable("cv", cv)
@@ -251,6 +251,10 @@ plt.ylabel("count")
 
 with open(os.path.join(newpath,"hist","metafile.txt"), "w") as f:
     f.writelines(metafilelines)
+output_directory = os.pathjoin(newpath,"results")
+if not os.path.exists(output_directory):
+    os.makedirs(output_directory)
+plt.savefig(output_directory)
 #&#######################################################################################################################################################################################
 
 # ~ WHAM on metafile.txt ################################################################################################################################################################
@@ -302,11 +306,7 @@ with open(os.path.join(newpath,"hist", "pmf.txt"), 'r') as file:
 
 fig, ax1 = plt.subplots()
 
-plt.rcParams.update({
-    "text.usetex": True,
-    "font.family": "Helvetica"
-})
-ax1.set_xlabel(r'\textrm{Reaction Coordinate (nm)}, \xi') # ! fix latex rendering
+ax1.set_xlabel('ξ') 
 ax1.set_ylabel('Free Energy', color='tab:blue')
 ax1.plot(coordinates, free_energies, 'b-', label='Free Energy')
 ax1.tick_params(axis='y', labelcolor='tab:blue')
@@ -321,3 +321,6 @@ fig.legend(loc='upper right', bbox_to_anchor=(1, 1), bbox_transform=ax1.transAxe
 
 plt.title('Histogram Data Plot')
 plt.show()
+
+
+plt.savefig(output_directory)
