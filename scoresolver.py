@@ -242,7 +242,7 @@ for i in range(len(windows)):
     cvpath = os.path.join(newpath,"cv",f'cv_{i}.txt')
     data = np.loadtxt(f'{cvpath}')
     plt.hist(data[:,1])
-    metafileline = f'{cvpath} {windows[i]} {wdelta} \n' # ? do i do just 'cv_{i}.txt {windows[i]}' or '{cvpath}' ?
+    metafileline = f'{cvpath} {windows[i]} {wdelta} \n'
     metafilelines.append(metafileline)
 
 plt.title("Histogram")
@@ -251,10 +251,11 @@ plt.ylabel("count")
 
 with open(os.path.join(newpath,"hist","metafile.txt"), "w") as f:
     f.writelines(metafilelines)
-output_directory = os.pathjoin(newpath,"results")
+output_directory = os.path.join(newpath,"results")
 if not os.path.exists(output_directory):
     os.makedirs(output_directory)
-plt.savefig(output_directory)
+plt.savefig(os.path.join(output_directory,"histogram.png"))
+plt.close()
 #&#######################################################################################################################################################################################
 
 # ~ WHAM on metafile.txt ################################################################################################################################################################
@@ -319,8 +320,9 @@ ax2.tick_params(axis='y', labelcolor='tab:red')
 fig.tight_layout()
 fig.legend(loc='upper right', bbox_to_anchor=(1, 1), bbox_transform=ax1.transAxes)
 
-plt.title('Histogram Data Plot')
-plt.show()
+plt.title('Potential Mean Force vs. ξ')
+
+plt.savefig(os.path.join(output_directory,"pmf.png"))
+plt.close()
 
 
-plt.savefig(output_directory)
