@@ -199,15 +199,15 @@ $$
 \Delta G^\circ = -RT\ln \frac{{{\int}_{{\mathrm{pocket}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{RT}}}} {\mathrm{d}}\xi}}{{{\int}_{{\mathrm{bulk}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{RT}}}} {\mathrm{d}}\xi}}
 $$
 
-- $\mathrm{pocket} := \{\xi:\textrm{protein at state}\,\xi\,\textrm{is bound to the protein} \}$ 
-- $\mathrm{bulk} := \{\xi:\textrm{protein at state}\,\xi\,\textrm{is not interacting with the protein} \}$ 
+- $\mathrm{pocket} := \{\xi:\textrm{ligand at state}\,\xi\,\textrm{is bound to the receptor} \}$ 
+- $\mathrm{bulk} := \{\xi:\textrm{ligand at state}\,\xi\,\textrm{is not interacting with the receptor} \}$ 
 
-So, what we have right now is the $F(\xi)$ curve. So, this equation is esentially:
+So, what we have right now is the $F(\xi)$ curve. Recognizing these as the continous definitions of the partition function, we simplify it down to:
 
 3.
 
 $$
-\Delta G^\circ = F(\xi_\ce{Unbound}) - F(\xi_\ce{Bound})
+\Delta G^\circ = F_\ce{pocket} - F_\ce{bulk}
 $$
 
 ---

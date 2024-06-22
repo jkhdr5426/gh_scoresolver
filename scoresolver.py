@@ -12,7 +12,9 @@ import sys
 from progress.bar import IncrementalBar 
 import pathlib
 
-# & make new test folder
+
+
+# & FILE MANAGING ####################################################################################################################################
 masterpath = os.path.join(pathlib.Path().absolute())
 testpath = os.path.join(masterpath, "tests")
 pdbname = "deca.pdb"
@@ -85,7 +87,7 @@ simulation.step(1000)
 
 #&##################################################################################################################################
 
-# ~ PARAMS ######################################################################################################
+# ~ PARAMETERS ######################################################################################################
 
 # * CV := distance betw CAs of two end residues
 L_i = 1.3 # ? start length
@@ -157,9 +159,9 @@ with open(pdbpath, 'r') as pdb_file:
                 print(f"\t Occupancy: {occupancy}")
                 print(f"\t Temperature Factor: {temp_factor}")
                 print(f"\t Element Symbol: {element_symbol}")
-##~############################################################################################################################
+#~############################################################################################################################
 
-#!########## SIMULATION ##################################################################################################################
+# ! SIMULATION ##################################################################################################################
 
 # * SMD pulling loop
 # Define the progress bar
@@ -199,7 +201,7 @@ for i, coords in enumerate(window_coords):
 
 #!##################################################################################################################################
 
-##^## RUN WINDOWS AND REUSE SIMULATION -> CV TIME SERIES FILES ########################################################################################################################################
+# ^ RUN WINDOWS AND REUSE SIMULATION -> CV TIME SERIES FILES ########################################################################################################################################
 
 def run_window(window_index):
     pdb = app.PDBFile(os.path.join(newpath, "windows", f'window_{window_index}.pdb'))  # Load from 'windows' directory
@@ -236,7 +238,7 @@ for n in range(num_win):
 
 #^#######################################################################################################################################
 
-# & histograms write and plot ##########################################################################################################################################
+# & metafile write and histogram save ##########################################################################################################################################
 metafilelines = []
 for i in range(len(windows)):
     cvpath = os.path.join(newpath,"cv",f'cv_{i}.txt')
@@ -260,7 +262,6 @@ plt.close()
 
 # ~ WHAM on metafile.txt ################################################################################################################################################################
 
-# ! USE POPEN TO EXECUTE child program ---->>>>> /Users/edwardkim/Downloads/wham 1.3 3.3 50 1e-6 300 0 metafile.txt pmf.txt > wham_log.txt
 
 wham_xecpath = os.path.join(masterpath,"wham4","wham","wham")
 print([wham_xecpath, str(L_i), str(L_f), '50', '1e-6', '300', '0', os.path.join(newpath,"hist", "metafile.txt"), os.path.join(newpath,"hist", "pmf.txt")])
@@ -282,9 +283,9 @@ with open(os.path.join(newpath,"hist","wham_log.txt"), "w") as output_file:
 if stderr_data:
     print("Error occurred:", stderr_data.decode())  # Decode stderr_data from bytes to string
 
-# ~ ###############################################################################################################################################################
+#~###############################################################################################################################################################
 
-# & plot PMF
+# & save PMF
 
 coordinates = []
 free_energies = []
