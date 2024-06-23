@@ -17,7 +17,7 @@ import pathlib
 # & FILE MANAGING ####################################################################################################################################
 masterpath = os.path.join(pathlib.Path().absolute())
 testpath = os.path.join(masterpath, "tests")
-pdbname = "deca.pdb"
+pdbname = "2rtg.pdb"
 pdbpath = os.path.join(testpath,"pdb",pdbname)
 
 if not os.path.exists(os.path.join(testpath, "pdb")):
@@ -73,6 +73,15 @@ pdb = app.PDBFile(pdbpath)
 # ? if its PFOA or proteins of superset of PFOA, it might have some missing hydrogens
 modeller = Modeller(pdb.topology, pdb.positions)
 forcefield = app.ForceField('amber14-all.xml')
+
+# ? add topology/params for missing residues: (EXPERIMENTAL)
+
+# [templates, residues] = forcefield.generateTemplatesForUnmatchedResidues(pdb.topology)
+# for template in templates:
+#    for atom in template.atoms:
+#        atom.type = 'LG1' # set the atom types here
+#    forcefield.registerResidueTemplate(template)
+
 modeller.addHydrogens(forcefield)
 pdb = modeller
 
@@ -90,10 +99,10 @@ simulation.step(1000)
 # ~ PARAMETERS ######################################################################################################
 
 # * CV := distance betw CAs of two end residues
-L_i = 1.3 # ? start length
-L_f = 3.3 # ? end length
-index1 = 8
-index2 = 98
+L_i = 1.3 # ? start length (nm)
+L_f = 3.3 # ? end length (nm)
+index1 = 3898 # ? atom serial number
+index2 = 2118 # ? atom serial number
 cv = mm.CustomBondForce('r')
 cv.addBond(index1, index2)
 num_win = 24
@@ -308,8 +317,8 @@ with open(os.path.join(newpath,"hist", "pmf.txt"), 'r') as file:
 
 fig, ax1 = plt.subplots()
 
-ax1.set_xlabel('ξ') 
-ax1.set_ylabel('Free Energy', color='tab:blue')
+ax1.set_xlabel('ξ') # TODO ADD LATEX AND ADD UNITS
+ax1.set_ylabel('Free Energy', color='tab:blue')  
 ax1.plot(coordinates, free_energies, 'b-', label='Free Energy')
 ax1.tick_params(axis='y', labelcolor='tab:blue')
 
@@ -323,7 +332,11 @@ fig.legend(loc='upper right', bbox_to_anchor=(1, 1), bbox_transform=ax1.transAxe
 
 plt.title('Potential Mean Force vs. ξ')
 
-plt.savefig(os.path.join(output_directory,"pmf.png"))
+plt.savefig(os.path.join(output_directory,"pmf.png"), bbox_inches='tight') # TODO FIX THE IMAGE CUTTING OFF, TEST: " bbox_inches='tight' "
 plt.close()
 
+# & Calculate LIGAND-RECEPTOR EQUI CONSTANT ##########################################################################################################################################
 
+
+
+#&#######################################################################################################################################################################################

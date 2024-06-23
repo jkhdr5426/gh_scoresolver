@@ -188,7 +188,7 @@ Theoretically, $K_d = \frac{[L][R]}{[LR]}$ where $[L],[R],[LR]$ are the cocentra
 1. Absolute Binding Free Energy
 
 $$
-\Delta G^\circ = RT\ln \frac{{K_{\mathrm{d}}}}{{1\,{\mathrm{M}}}} \implies K_d = e^{\frac{\Delta G^\circ}{RT}}\cdot 1\,\ce{M}
+\Delta F^\circ = k_B T\ln K_\mathrm{d} \implies K_\mathrm{d} = e^{\frac{\Delta F^\circ}{k_B T}}
 $$
 
 Where $1\,\mathrm{M}$ is 1 molar concentration and $R$ is the universal gas constant. We determine $\Delta G^\circ$ with the PMF graph we have obtanied. In order to do that, we can use this equation:
@@ -196,7 +196,7 @@ Where $1\,\mathrm{M}$ is 1 molar concentration and $R$ is the universal gas cons
 2. 
 
 $$
-\Delta G^\circ = -RT\ln \frac{{{\int}_{{\mathrm{pocket}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{RT}}}} {\mathrm{d}}\xi}}{{{\int}_{{\mathrm{bulk}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{RT}}}} {\mathrm{d}}\xi}}
+\Delta G^\circ = -k_B T\ln \frac{{{\int}_{{\mathrm{pocket}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{k_B T}}}} {\mathrm{d}}\xi}}{{{\int}_{{\mathrm{bulk}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{k_B T}}}} {\mathrm{d}}\xi}} = -k_B T \frac{Z^\circ _\mathrm{pocket}}{Z^\circ _\mathrm{bulk}}
 $$
 
 - $\mathrm{pocket} := \{\xi:\textrm{ligand at state}\,\xi\,\textrm{is bound to the receptor} \}$ 
