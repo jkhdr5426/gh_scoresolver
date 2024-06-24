@@ -197,6 +197,7 @@ Where $1\,\mathrm{M}$ is 1 molar concentration and $R$ is the universal gas cons
 
 $$
 \Delta G^\circ = -k_B T\ln \frac{{{\int}_{{\mathrm{pocket}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{k_B T}}}} {\mathrm{d}}\xi}}{{{\int}_{{\mathrm{bulk}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{k_B T}}}} {\mathrm{d}}\xi}} = -k_B T \frac{Z^\circ _\mathrm{pocket}}{Z^\circ _\mathrm{bulk}}
+
 $$
 
 - $\mathrm{pocket} := \{\xi:\textrm{ligand at state}\,\xi\,\textrm{is bound to the receptor} \}$ 
