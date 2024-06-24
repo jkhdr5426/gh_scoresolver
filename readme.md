@@ -188,7 +188,7 @@ Theoretically, $K_d = \frac{[L][R]}{[LR]}$ where $[L],[R],[LR]$ are the cocentra
 1. Absolute Binding Free Energy
 
 $$
-\Delta F^\circ = k_B T\ln K_\mathrm{d} \implies K_\mathrm{d} = e^{\frac{\Delta F^\circ}{k_B T}}
+\Delta F^\circ = k_B T\ln K_\mathrm{d} \Rightarrow K_\mathrm{d} = e^{\frac{\Delta F^\circ}{k_B T}}
 $$
 
 Where $1\,\mathrm{M}$ is 1 molar concentration and $R$ is the universal gas constant. We determine $\Delta G^\circ$ with the PMF graph we have obtanied. In order to do that, we can use this equation:
