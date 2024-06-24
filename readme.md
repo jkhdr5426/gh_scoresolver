@@ -196,9 +196,7 @@ Where $1\,\mathrm{M}$ is 1 molar concentration and $R$ is the universal gas cons
 2. 
 
 $$
-
 \Delta G^\circ = -k_B T\ln \frac{{{\int}_{{\mathrm{pocket}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{k_B T}}}} {\mathrm{d}}\xi}}{{{\int}_{{\mathrm{bulk}}} {{\mathrm{e}}^{ - \frac{{{{\Delta }}F\left( {{{\xi}}} \right)}}{{k_B T}}}} {\mathrm{d}}\xi}} = -k_B T \frac{Z^\circ _\mathrm{pocket}}{Z^\circ _\mathrm{bulk}}
-
 $$
 
 - $\mathrm{pocket} := \{\xi:\textrm{ligand at state}\,\xi\,\textrm{is bound to the receptor} \}$ 
@@ -209,7 +207,7 @@ So, what we have right now is the $F(\xi)$ curve. Recognizing these as the conti
 3.
 
 $$
-\Delta G^\circ = F_\ce{pocket} - F_\ce{bulk}
+\Delta G^\circ = F_\textrm{pocket} - F_\textrm{bulk}
 $$
 
 ---
