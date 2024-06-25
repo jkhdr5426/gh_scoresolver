@@ -79,7 +79,7 @@ forcefield = app.ForceField('amber14-all.xml')
 # [templates, residues] = forcefield.generateTemplatesForUnmatchedResidues(pdb.topology)
 # for template in templates:
 #    for atom in template.atoms:
-#        atom.type = 'LG1' # set the atom types here
+#        atom.type = 'LG1' # set the atom types here # ? 
 #    forcefield.registerResidueTemplate(template)
 
 modeller.addHydrogens(forcefield)
@@ -272,7 +272,7 @@ plt.close()
 # ~ WHAM on metafile.txt ################################################################################################################################################################
 
 
-wham_xecpath = os.path.join(masterpath,"wham4","wham","wham")
+wham_xecpath = os.path.join(masterpath,"wham","wham","wham")
 print([wham_xecpath, str(L_i), str(L_f), '50', '1e-6', '300', '0', os.path.join(newpath,"hist", "metafile.txt"), os.path.join(newpath,"hist", "pmf.txt")])
 args = [wham_xecpath, str(L_i), str(L_f), '50', '1e-6', '300', '0', os.path.join(newpath,"hist", "metafile.txt"), os.path.join(newpath,"hist", "pmf.txt")]
 
@@ -337,6 +337,12 @@ plt.close()
 
 # & Calculate LIGAND-RECEPTOR EQUI CONSTANT ##########################################################################################################################################
 
-
+#
+#
+# $$
+# \Delta G^\circ = F_\textrm{pocket} - F_\textrm{bulk}
+# $$
+# ---
+#
 
 #&#######################################################################################################################################################################################
