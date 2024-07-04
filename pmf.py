@@ -17,7 +17,7 @@ import pathlib
 # & FILE MANAGING ####################################################################################################################################
 masterpath = os.path.join(pathlib.Path().absolute())
 testpath = os.path.join(masterpath, "tests")
-pdbname = "2rtg.pdb"
+pdbname = "5gmn.pdb"
 pdbpath = os.path.join(testpath,"pdb",pdbname)
 
 if not os.path.exists(os.path.join(testpath, "pdb")):
@@ -75,12 +75,7 @@ modeller = Modeller(pdb.topology, pdb.positions)
 forcefield = app.ForceField('amber14-all.xml')
 
 # ? add topology/params for missing residues: (EXPERIMENTAL)
-
-# [templates, residues] = forcefield.generateTemplatesForUnmatchedResidues(pdb.topology)
-# for template in templates:
-#    for atom in template.atoms:
-#        atom.type = 'LG1' # set the atom types here # ? 
-#    forcefield.registerResidueTemplate(template)
+# forcefield = ForceField('amber14-all.xml', 'amber14/tip3pfb.xml', '22-23_season/AHL/gaff.xml', '22-23_season/AHL/ahl-specific.xml')
 
 modeller.addHydrogens(forcefield)
 pdb = modeller
@@ -344,5 +339,37 @@ plt.close()
 # $$
 # ---
 #
+def calculate_kd(pmf_data, bound_range, unbound_range, temperature):
+    # Extract relevant PMF values and distances
+    distances = pmf_data[:, 0]
+    pmf_values = pmf_data[:, 1]
+    
+    # Find indices for bound and unbound ranges
+    bound_indices = np.where((distances >= bound_range[0]) & (distances <= bound_range[1]))[0]
+    unbound_indices = np.where((distances >= unbound_range[0]) & (distances <= unbound_range[1]))[0]
+    
+    # Calculate F_pocket and F_bulk
+    F_pocket = np.mean(pmf_values[bound_indices])
+    F_bulk = np.mean(pmf_values[unbound_indices])
+    
+    # Calculate Delta G
+    delta_G = F_pocket - F_bulk
+    
+    # Calculate KD
+    R = 8.314  # Gas constant in J/(mol*K)
+    K_D = np.exp(delta_G / (R * temperature))
+    
+    return K_D
+
+# File path
+data_file = os.path.join(output_directory,"pmf.png")  # Replace with your actual file path
+
+bound_range = (1.4, 1.6) 
+unbound_range = (2.8, 3.0) # reaction coord 
+
+# Calculate KD
+temperature = 300  # Temperature in Kelvin
+kd = calculate_kd(os.path.join(newpath,"hist", "pmf.txt"), bound_range, unbound_range, 300) # kelvins
+print(f"KD calculated from PMF data: {kd}")
 
 #&#######################################################################################################################################################################################

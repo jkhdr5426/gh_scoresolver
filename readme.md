@@ -43,9 +43,12 @@ graph LR;
     pmf["pmf.txt"]
     traj["smd_traj.dcd"]
     wl["wham_logs.txt"]
+    kd["$$K_d$$ :)"]
     pdb -- "SMD Pulling Loop" --> traj & win
     win -- "Umbrella Sampling" --> mt
     mt -- "WHAM ANALYSIS" --> pmf & wl
+    pmf -- "Binding Coeff. Algorithm" --> kd
+    win -- "Binding Coeff. Algorithm" --> kd
 ~~~
 
 ---
