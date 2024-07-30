@@ -10,6 +10,7 @@ import os
 import re
 import sys
 from progress.bar import IncrementalBar 
+from scipy.signal import argrelextrema
 import pathlib
 
 
@@ -163,6 +164,9 @@ with open(pdbpath, 'r') as pdb_file:
                 print(f"\t Occupancy: {occupancy}")
                 print(f"\t Temperature Factor: {temp_factor}")
                 print(f"\t Element Symbol: {element_symbol}")
+
+# pmf > binding force calculation
+tolerance = 0.1 # the max threshold of change in PMF for it to be "unchanging"
 #~############################################################################################################################
 
 # ! SIMULATION ##################################################################################################################
@@ -340,36 +344,73 @@ plt.close()
 # ---
 #
 def calculate_kd(pmf_data, bound_range, unbound_range, temperature):
-    # Extract relevant PMF values and distances
     distances = pmf_data[:, 0]
     pmf_values = pmf_data[:, 1]
     
-    # Find indices for bound and unbound ranges
     bound_indices = np.where((distances >= bound_range[0]) & (distances <= bound_range[1]))[0]
     unbound_indices = np.where((distances >= unbound_range[0]) & (distances <= unbound_range[1]))[0]
     
-    # Calculate F_pocket and F_bulk
     F_pocket = np.mean(pmf_values[bound_indices])
     F_bulk = np.mean(pmf_values[unbound_indices])
     
-    # Calculate Delta G
     delta_G = F_pocket - F_bulk
-    
-    # Calculate KD
-    R = 8.314  # Gas constant in J/(mol*K)
+
+    R = 8.314  
     K_D = np.exp(delta_G / (R * temperature))
     
     return K_D
 
-# File path
-data_file = os.path.join(output_directory,"pmf.png")  # Replace with your actual file path
+def identify_bound_state(pmf_data):
+    distances = pmf_data[:, 0]
+    pmf_values = pmf_data[:, 1]
+    
+    # Find local minima
+    local_min_indices = argrelextrema(pmf_values, np.less)[0]
+    if len(local_min_indices) == 0:
+        raise ValueError("No local minima found in the PMF data.")
+    
+    # Choose the first local minimum as the bound state
+    bound_index = local_min_indices[0]
+    bound_distance = distances[bound_index]
+    
+    # Define a small range around the bound distance
+    bound_range = (bound_distance - 0.1, bound_distance + 0.1)
+    return bound_range
 
-bound_range = (1.4, 1.6) 
-unbound_range = (2.8, 3.0) # reaction coord 
+def identify_unbound_state(pmf_data):
+    distances = pmf_data[:, 0]
+    pmf_values = pmf_data[:, 1]
+    
+    # Find a flat region
+    for i in range(len(pmf_values) - 1):
+        if abs(pmf_values[i+1] - pmf_values[i]) < tolerance:
+            unbound_distance = distances[i]
+            break
+    else:
+        raise ValueError("No flat region found in the PMF data.")
+    
+    # Define a small range around the unbound distance
+    unbound_range = (unbound_distance, unbound_distance + 0.2)
+    return unbound_range
 
-# Calculate KD
-temperature = 300  # Temperature in Kelvin
-kd = calculate_kd(os.path.join(newpath,"hist", "pmf.txt"), bound_range, unbound_range, 300) # kelvins
+
+pmf_data = np.loadtxt(os.path.join(newpath, "hist", "pmf.txt"))
+
+
+bound_range = identify_bound_state(pmf_data)
+unbound_range = identify_unbound_state(pmf_data,tolerance)
+temperature = 300
+kd = calculate_kd(pmf_data, bound_range, unbound_range, temperature)
+
 print(f"KD calculated from PMF data: {kd}")
+plt.plot(pmf_data[:, 0], pmf_data[:, 1], label='PMF')
+plt.axvspan(bound_range[0], bound_range[1], color='red', alpha=0.3, label='Bound region')
+plt.axvspan(unbound_range[0], unbound_range[1], color='blue', alpha=0.3, label='Unbound region')
+plt.xlabel('ξ (nm)')
+plt.ylabel('Free Energy (kJ/mol)')
+plt.legend()
+plt.title('Potential Mean Force (PMF)')
+plt.savefig(os.path.join(output_directory, "pmf_with_bound_unbound.png"), bbox_inches='tight')
+plt.close()
 
 #&#######################################################################################################################################################################################
