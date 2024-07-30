@@ -336,13 +336,6 @@ plt.close()
 
 # & Calculate LIGAND-RECEPTOR EQUI CONSTANT ##########################################################################################################################################
 
-#
-#
-# $$
-# \Delta G^\circ = F_\textrm{pocket} - F_\textrm{bulk}
-# $$
-# ---
-#
 def calculate_kd(pmf_data, bound_range, unbound_range, temperature):
     distances = pmf_data[:, 0]
     pmf_values = pmf_data[:, 1]
