@@ -18,7 +18,7 @@ import pathlib
 # & FILE MANAGING ####################################################################################################################################
 masterpath = os.path.join(pathlib.Path().absolute())
 testpath = os.path.join(masterpath, "tests")
-pdbname = "5gmn.pdb"
+pdbname = "complexNOH.pdb"
 pdbpath = os.path.join(testpath,"pdb",pdbname)
 
 if not os.path.exists(os.path.join(testpath, "pdb")):
@@ -73,7 +73,7 @@ pdb = app.PDBFile(pdbpath)
 
 # ? if its PFOA or proteins of superset of PFOA, it might have some missing hydrogens
 modeller = Modeller(pdb.topology, pdb.positions)
-forcefield = app.ForceField('amber14-all.xml')
+forcefield = app.ForceField('amber14-all.xml','manual-ky-main/pfoa/pfoa-specific.xml')
 
 # ? add topology/params for missing residues: (EXPERIMENTAL)
 # forcefield = ForceField('amber14-all.xml', 'amber14/tip3pfb.xml', '22-23_season/AHL/gaff.xml', '22-23_season/AHL/ahl-specific.xml')
