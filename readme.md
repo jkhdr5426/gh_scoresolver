@@ -131,8 +131,6 @@ $$
 
    Here higher values of $\beta$, or coldness, makes states with lower temperatures more probable than otherwise. While lower values of $\beta$, leading to higher temperatures, makes states with higher temperatures more probable than otherwise. Regardles of positive $\beta >0$, lower temperature states are more probable than higher temperature states. Note in this graph, $\lambda \equiv \beta$.
 
-   ![Boltzmann Factor]()
-
 6. Probability Distribution (continous):
 
 $$
