@@ -1,3 +1,21 @@
+# Dependencies:
+
+You need to install the Conda dependencies this script uses.
+
+1. Conda
+2. Pip
+3. OpenMM: 
+4. Conda Packages via below where you can replace ENVIRONMENTNAME with your choice. Then, in your terminal in any directory that you reserve for projects (get to that directory via cd command), type in below. Replace PATHTOPACAKGELISTTXT with the path to the environment.yml file. The new environment will be named 'testenv'.
+~~~
+conda env create -f PATHTOPACAKGELISTTXT
+~~~
+
+To activate the environment:
+
+~~~
+conda activate testenv
+~~~
+
 # Add Permissions for Wham Subprocess
 
 #### MacOS
@@ -67,22 +85,22 @@ In all, the main theory is that we are pulling a complex or whatever at two pivo
 
 ### Definitions
 
-- $F $: Free energy
-- $k_B $: Boltzmann constant
-- $T $: Temperature
-- $Z $: Canonical partition function
-- $\xi $: Collective Variable (CV) $\to$ represents the progress of a reaction into a single value of a **state**
-- $\mathbf{r} $: Atomic coordinates
-- $P(\xi) $: Probability distribution of the system as a function of CV
-- $\beta $: Inverse temperature ($\beta = 1 / k_B T $)
-- $U(\mathbf{r}) $: Potential energy of the system
-- $U_i^{\text{bias}} $: Biasing potential for window $i $
-- $k $: Force constant for the biasing potential
-- $\xi_i $: Target value of the CV in window $i $
-- $P_i^{\text{bias}}(\xi) $: Biased probability distribution for window $i $
-- $n_i(\xi) $: Number of samples in bin $\xi$ for window $i $
-- $F_i^{\text{bias}}(\xi) $: Biased free energy in window $i $
-- $F(\xi) $: Unbiased free energy (Potential of Mean Force, PMF)
+- $F$: Free energy
+- $k_B$: Boltzmann constant
+- $T$: Temperature
+- $Z$: Canonical partition function
+- $\xi$: Collective Variable (CV) $\to$ represents the progress of a reaction into a single value of a **state**
+- $\mathbf{r}$: Atomic coordinates
+- $P(\xi)$: Probability distribution of the system as a function of CV
+- $\beta$: Inverse temperature ($\beta = 1 / k_B T $)
+- $U(\mathbf{r})$: Potential energy of the system
+- $U_i^{\text{bias}}$: Biasing potential for window $i $
+- $k$: Force constant for the biasing potential
+- $\xi_i$: Target value of the CV in window $i $
+- $P_i^{\text{bias}}(\xi)$: Biased probability distribution for window $i $
+- $n_i(\xi)$: Number of samples in bin $\xi$ for window $i $
+- $F_i^{\text{bias}}(\xi)$: Biased free energy in window $i $
+- $F(\xi)$: Unbiased free energy (Potential of Mean Force, PMF)
 - ${\displaystyle \delta _{a}(x)}$: Dirac delta function
 
 ### Equations
@@ -103,7 +121,7 @@ $$
 
    In context, $F$ can be expressed in terms of a specific state $\xi$, so $F(\xi) = -k_B T \ln P(\xi) + C$
 
-3. Dirac Delta Function: ($\delta(x) = \delta_1(x) $):
+3. Dirac Delta Function: ($\delta(x) = \delta_1(x)$):
 
 $$
 {\displaystyle \delta _{a}(x)={\frac {1}{\left|a\right|{\sqrt {\pi }}}}e^{-(x/a)^{2}}}
