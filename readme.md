@@ -147,7 +147,7 @@ $$
 P(\textbf{r}) = \frac{\exp(-\beta E(r))}{Z} : \beta = \frac{1}{k_B T}
 $$
 
-Here higher values of $\beta$, or coldness, makes states with lower temperatures more probable than otherwise. While lower values of $\beta$, leading to higher temperatures, makes states with higher temperatures more probable than otherwise. Regardles of positive $\beta >0$, lower temperature states are more probable than higher temperature states. Note that $\lambda \equiv \beta$.
+   Here higher values of $\beta$, or coldness, makes states with lower temperatures more probable than otherwise. While lower values of $\beta$, leading to higher temperatures, makes states with higher temperatures more probable than otherwise. Regardles of positive $\beta >0$, lower temperature states are more probable than higher temperature states. Note that $\lambda \equiv \beta$.
 
 6. Probability Distribution (continous):
 
