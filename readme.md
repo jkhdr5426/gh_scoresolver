@@ -121,7 +121,7 @@ $$
 
    In context, $F$ can be expressed in terms of a specific state $\xi$, so $F(\xi) = -k_B T \ln P(\xi) + C$
 
-3. Dirac Delta Function: ($\delta(x) = \delta_1(x)$):
+3. Dirac Delta Function: ( $\delta(x) = \delta_1(x)$ ):
 
 $$
 {\displaystyle \delta _{a}(x)={\frac {1}{\left|a\right|{\sqrt {\pi }}}}e^{-(x/a)^{2}}}
